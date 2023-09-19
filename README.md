@@ -1,24 +1,27 @@
-HSPA - Property Listing Application
-HSPA (Homes for Sale and Purchase Application) is a property listing web application developed based on "Angular and ASP.NET Core Web API Course | Learn by building a real application" created by Study Mash. This repository contains both the frontend and backend components of the HSPA application.
+# HSPA
 
-The tutorial playlist consists of various videos that cover different aspects of building a property listing application using Angular and ASP.NET Core Web API. Here's a brief overview of what you will find in this repository:
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
-Features
-Angular Frontend: The frontend of the application is built using Angular. It covers topics such as project setup, component creation, routing, forms (both template-driven and reactive), authentication, error handling, and more.
+## Development server
 
-ASP.NET Core Web API: The backend of the application is developed using ASP.NET Core. It includes features like creating a Web API project, using Entity Framework Core for data access, implementing CRUD operations, user authentication with JWT, error handling, and deployment to Azure.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Database Integration: The tutorial covers database integration using Entity Framework Core, including database seeding.
+## Code scaffolding
 
-Authentication: Learn how to authenticate users using JWT (JSON Web Tokens) and secure your API.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Additional Features: The tutorial playlist also covers additional features such as handling errors globally in Angular, file uploads, setting primary photos, and more.
+## Build
 
-Getting Started
-To get started with this repository, follow these steps:
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-Clone the repository:
+## Running unit tests
 
-Navigate to the project folders (HSPA-Client for the Angular frontend and HSPA-API for the ASP.NET Core Web API) and follow the README files within those folders for specific setup instructions.
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-Start building and customizing your property listing application!
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
