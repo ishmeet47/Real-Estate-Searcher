@@ -1,12 +1,12 @@
 <div class="card" style="align-items: center">
   <div class="card-img-wrapper">
     <img
-      *ngIf="property.Image"
+      *ngIf="property.photo"
       class="card-img-top"
-      src="assets/images/{{ property.Image }}.png"
+      src="assets/images/{{ property.photo }}.png"
     />
     <img
-      *ngIf="!property.Image"
+      *ngIf="!property.photo"
       class="card-img-top"
       src="assets/images/house_default.png"
     />
@@ -14,7 +14,7 @@
       <li class="list-inline-item">
         <button
           class="btn btn-primary"
-          routerLink="/property-detail/{{ property.Id }}"
+          routerLink="/property-detail/{{ property.id }}"
         >
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
@@ -27,8 +27,8 @@
     </ul>
   </div>
   <div class="card-body p-2">
-    <h1>{{ property.Name }}</h1>
-    <h2>{{ property.Type }}</h2>
-    <h3>{{ property.Price }}</h3>
+    <h1>{{ property.name }}</h1>
+    <h2>{{ property.propertyType }}</h2>
+    <h3>{{ property.price }}</h3>
   </div>
 </div>
