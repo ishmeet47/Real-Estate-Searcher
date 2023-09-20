@@ -63,6 +63,8 @@ export class UserRegisterComponent implements OnInit {
       //     this.onReset();
       //     this.alertify.success('Congrats, you are successfully registered');
       // });
+    } else {
+      this.alertify.error('Kindly provide the required fields');
     }
   }
 
