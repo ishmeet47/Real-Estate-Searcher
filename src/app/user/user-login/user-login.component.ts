@@ -29,7 +29,7 @@ export class UserLoginComponent implements OnInit {
       this.alertify.success('Login Successful');
       this.router.navigate(['/']);
     } else {
-      this.alertify.error('Login Failed');
+      this.alertify.error('Incorrect username or password');
     }
 
     // this.authService.authUser(loginForm.value).subscribe(
