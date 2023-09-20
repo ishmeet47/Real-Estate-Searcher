@@ -5,9 +5,9 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
-// import { UserForRegister } from 'src/app/model/user';
+import { UserForRegister } from 'src/app/model/user';
 import { AlertifyService } from 'src/app/services/alertify.service';
-// import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-register',
@@ -16,11 +16,11 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 })
 export class UserRegisterComponent implements OnInit {
   registerationForm: FormGroup;
-  // user: UserForRegister;
+  user: UserForRegister;
   userSubmitted: boolean;
   constructor(
     private fb: FormBuilder,
-    // private authService: AuthService,
+    private authService: AuthService,
     private alertify: AlertifyService
   ) {}
 
@@ -48,10 +48,16 @@ export class UserRegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.registerationForm.value);
+    // console.log(this.registerationForm.value);
     this.userSubmitted = true;
 
     if (this.registerationForm.valid) {
+      // this.user = Object.assign(this.user, this.registerationForm.value);
+      this.authService.addUser(this.userData());
+      this.registerationForm.reset();
+      this.userSubmitted = false;
+      this.alertify.success('Congrats, you are successfully registered');
+
       // this.authService.registerUser(this.userData()).subscribe(() =>
       // {
       //     this.onReset();
@@ -65,14 +71,14 @@ export class UserRegisterComponent implements OnInit {
     this.registerationForm.reset();
   }
 
-  // userData(): UserForRegister {
-  //     return this.user = {
-  //         userName: this.userName.value,
-  //         email: this.email.value,
-  //         password: this.password.value,
-  //         mobile: this.mobile.value
-  //     };
-  // }
+  userData(): UserForRegister {
+    return (this.user = {
+      userName: this.userName.value,
+      email: this.email.value,
+      password: this.password.value,
+      mobile: this.mobile.value,
+    });
+  }
 
   // ------------------------------------
   // Getter methods for all form controls
