@@ -54,9 +54,49 @@ export class PropertyDetailComponent implements OnInit {
         imageAnimation: NgxGalleryAnimation.Slide,
         preview: true,
       },
+      {
+        breakpoint: 800,
+        width: '100%',
+        height: '400px',
+        imagePercent: 80,
+        thumbnailsPercent: 20,
+        thumbnailsMargin: 20,
+        thumbnailMargin: 20,
+      },
+      {
+        breakpoint: 400,
+        preview: false,
+      },
     ];
 
-    this.galleryImages = this.getPropertyPhotos();
+    // this.galleryImages = this.getPropertyPhotos();
+    this.galleryImages = [
+      {
+        small: 'assets/images/internal-1.jpg',
+        medium: 'assets/images/internal-1.jpg',
+        big: 'assets/images/internal-1.jpg',
+      },
+      {
+        small: 'assets/images/internal-2.jpg',
+        medium: 'assets/images/internal-2.jpg',
+        big: 'assets/images/internal-2.jpg',
+      },
+      {
+        small: 'assets/images/internal-3.jpg',
+        medium: 'assets/images/internal-3.jpg',
+        big: 'assets/images/internal-3.jpg',
+      },
+      {
+        small: 'assets/images/internal-4.jpg',
+        medium: 'assets/images/internal-4.jpg',
+        big: 'assets/images/internal-4.jpg',
+      },
+      {
+        small: 'assets/images/internal-5.jpg',
+        medium: 'assets/images/internal-5.jpg',
+        big: 'assets/images/internal-5.jpg',
+      },
+    ];
   }
 
   changePrimaryPhoto(mainPhotoUrl: string) {
