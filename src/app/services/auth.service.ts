@@ -5,7 +5,7 @@ import { UserForRegister } from '../model/user';
   providedIn: 'root',
 })
 export class AuthService {
-  addUser(user: UserForRegister) {
+  registerUser(user: UserForRegister) {
     let users = [];
     if (localStorage.getItem('Users')) {
       users = JSON.parse(localStorage.getItem('Users'));
