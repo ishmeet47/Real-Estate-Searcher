@@ -249,6 +249,12 @@ export class AddPropertyComponent implements OnInit {
         'Congrats, your property listed successfully on our website'
       );
       console.log(this.addPropertyForm);
+
+      if (this.SellRent.value === '2') {
+        this.router.navigate(['/rent-property']);
+      } else {
+        this.router.navigate(['/']);
+      }
     } else {
       this.alertify.error(
         'Please review the form and provide all valid entries'
