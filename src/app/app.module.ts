@@ -22,8 +22,8 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { AlertifyService } from './services/alertify.service';
 import { AuthService } from './services/auth.service';
-// import { FilterPipe } from './Pipes/filter.pipe';
-// import { SortPipe } from './Pipes/sort.pipe';
+import { FilterPipe } from './Pipes/filter.pipe';
+import { SortPipe } from './Pipes/sort.pipe';
 // import { HttpErrorInterceptorService } from './services/httperor-interceptor.service';
 import { DatePipe } from '@angular/common';
 // import { PhotoEditorComponent } from './property/photo-editor/photo-editor.component';
@@ -55,8 +55,8 @@ const appRoutes: Routes = [
     UserRegisterComponent,
     UserLoginComponent,
     // PhotoEditorComponent
-    // FilterPipe,
-    // SortPipe,
+    FilterPipe,
+    SortPipe,
     NavBarComponent,
   ],
   imports: [
@@ -83,7 +83,7 @@ const appRoutes: Routes = [
     HousingService,
     AlertifyService,
     AuthService,
-    // PropertyDetailResolverService
+    PropertyDetailResolverService,
   ],
   bootstrap: [AppComponent],
 })
