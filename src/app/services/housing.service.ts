@@ -13,18 +13,55 @@ export class HousingService {
 
   constructor(private http: HttpClient) {}
 
-  getAllCities(): Observable<string[]> {
-    return this.http.get<string[]>(this.baseUrl + '/city/cities');
+  // getAllCities(): Observable<string[]> {
+  //   return this.http.get<string[]>(this.baseUrl + '/city/cities');
+  // }
+
+  // getPropertyTypes(): Observable<Ikeyvaluepair[]> {
+  //   return this.http.get<Ikeyvaluepair[]>(this.baseUrl + '/propertytype/list');
+  // }
+
+  // getFurnishingTypes(): Observable<Ikeyvaluepair[]> {
+  //   return this.http.get<Ikeyvaluepair[]>(
+  //     this.baseUrl + '/furnishingtype/list'
+  //   );
+  // }
+
+  getAllCities(): any[] {
+    return [
+      {
+        name: 'Mumbai',
+        id: 1,
+      },
+      {
+        name: 'Bangalore',
+        id: 2,
+      },
+      {
+        name: 'Pune',
+        id: 3,
+      },
+      {
+        name: 'Delhi',
+        id: 4,
+      },
+    ];
   }
 
-  getPropertyTypes(): Observable<Ikeyvaluepair[]> {
-    return this.http.get<Ikeyvaluepair[]>(this.baseUrl + '/propertytype/list');
+  getPropertyTypes(): Ikeyvaluepair[] {
+    return [
+      { id: 1, name: 'House' },
+      { id: 2, name: 'Apartment' },
+      { id: 3, name: 'Duplex' },
+    ];
   }
 
-  getFurnishingTypes(): Observable<Ikeyvaluepair[]> {
-    return this.http.get<Ikeyvaluepair[]>(
-      this.baseUrl + '/furnishingtype/list'
-    );
+  getFurnishingTypes(): Ikeyvaluepair[] {
+    return [
+      { id: 1, name: 'Fully' },
+      { id: 2, name: 'Semi' },
+      { id: 3, name: 'Unfurnished' },
+    ];
   }
 
   getProperty(id: number) {
