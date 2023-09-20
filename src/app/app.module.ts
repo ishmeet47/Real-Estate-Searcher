@@ -20,8 +20,8 @@ import { AddPropertyComponent } from './property/add-property/add-property.compo
 import { PropertyDetailComponent } from './property/property-detail/property-detail.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
-// import { AlertifyService } from './services/alertify.service';
-// import { AuthService } from './services/auth.service';
+import { AlertifyService } from './services/alertify.service';
+import { AuthService } from './services/auth.service';
 // import { FilterPipe } from './Pipes/filter.pipe';
 // import { SortPipe } from './Pipes/sort.pipe';
 // import { HttpErrorInterceptorService } from './services/httperor-interceptor.service';
@@ -80,8 +80,8 @@ const appRoutes: Routes = [
     // },
     DatePipe,
     HousingService,
-    // AlertifyService,
-    // AuthService,
+    AlertifyService,
+    AuthService,
     // PropertyDetailResolverService
   ],
   bootstrap: [AppComponent],
