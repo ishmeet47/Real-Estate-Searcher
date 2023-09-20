@@ -24,7 +24,7 @@ import { AlertifyService } from './services/alertify.service';
 import { AuthService } from './services/auth.service';
 import { FilterPipe } from './Pipes/filter.pipe';
 import { SortPipe } from './Pipes/sort.pipe';
-// import { HttpErrorInterceptorService } from './services/httperor-interceptor.service';
+import { HttpErrorInterceptorService } from './services/httperror-interceptor.service';
 import { DatePipe } from '@angular/common';
 // import { PhotoEditorComponent } from './property/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -74,11 +74,11 @@ const appRoutes: Routes = [
     FileUploadModule,
   ],
   providers: [
-    // {
-    //     provide: HTTP_INTERCEPTORS,
-    //     useClass: HttpErrorInterceptorService,
-    //     multi: true
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi: true,
+    },
     DatePipe,
     HousingService,
     AlertifyService,
