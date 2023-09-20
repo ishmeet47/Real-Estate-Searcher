@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Property } from '../model/property';
 import { environment } from '../../environments/environment';
 import { Ikeyvaluepair } from '../model/IKeyValuePair';
+import { IProperty } from '../property/IProperty.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -70,22 +71,35 @@ export class HousingService {
     );
   }
 
-  getAllProperties(SellRent?: number): Observable<Property[]> {
-    return this.http.get<Property[]>(
-      this.baseUrl + '/property/list/' + SellRent.toString()
+  getAllProperties(SellRent?: number): Observable<IProperty[]> {
+    // return this.http.get<Property[]>(
+    //   this.baseUrl + '/property/list/' + SellRent.toString()
+    // );
+    return this.http.get('data/properties.json').pipe(
+      map((data) => {
+        const propertiesArray: Array<IProperty> = [];
+        for (const id in data) {
+          if (data.hasOwnProperty(id) && data[id].SellRent === SellRent) {
+            propertiesArray.push(data[id as keyof object]);
+          }
+        }
+
+        return propertiesArray;
+      })
     );
   }
   addProperty(property: Property) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      }),
-    };
-    return this.http.post(
-      this.baseUrl + '/property/add',
-      property,
-      httpOptions
-    );
+    localStorage.setItem('newProp', JSON.stringify(property));
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     Authorization: 'Bearer ' + localStorage.getItem('token'),
+    //   }),
+    // };
+    // return this.http.post(
+    //   this.baseUrl + '/property/add',
+    //   property,
+    //   httpOptions
+    // );
   }
 
   newPropID() {

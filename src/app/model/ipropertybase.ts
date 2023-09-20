@@ -1,14 +1,14 @@
 export interface IPropertyBase {
-    id: number;
-    sellRent: number;
-    name: string;
-    propertyType: string;
-    furnishingType: string;
-    price: number;
-    bhk: number;
-    builtArea: number;
-    city: string;
-    readyToMove: boolean;
-    photo?: string;
-    estPossessionOn?: string;
+  Id: number;
+  SellRent: number;
+  Name: string;
+  PropertyType: string;
+  FurnishingType: string;
+  Price: number;
+  BHK: number;
+  BuiltArea: number;
+  City: string;
+  ReadyToMove: boolean;
+  Photo?: string;
+  EstPossessionOn?: string;
 }
