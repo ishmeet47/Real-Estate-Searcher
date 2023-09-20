@@ -1,34 +1,52 @@
-<div class="card" style="align-items: center">
+<div class="card">
   <div class="card-img-wrapper">
     <img
-      *ngIf="property.photo"
+      *ngIf="property.Photo"
       class="card-img-top"
-      src="assets/images/{{ property.photo }}.png"
+      src="{{ property.Photo }}"
     />
     <img
-      *ngIf="!property.photo"
+      *ngIf="!property.Photo"
       class="card-img-top"
       src="assets/images/house_default.png"
     />
-    <ul class="list-inline text-center member-icons animate">
+    <ul *ngIf="!hideIcons" class="list-inline text-center member-icons animate">
       <li class="list-inline-item">
         <button
           class="btn btn-primary"
-          routerLink="/property-detail/{{ property.id }}"
+          routerLink="/property-detail/{{ property.Id }}"
         >
-          <i class="fa-regular fa-pen-to-square"></i>
+          <i class="far fa-edit"></i>
         </button>
       </li>
       <li class="list-inline-item">
         <button class="btn btn-primary">
-          <i class="fa-regular fa-address-book"></i>
+          <i class="far fa-address-book"></i>
         </button>
       </li>
     </ul>
   </div>
-  <div class="card-body p-2">
-    <h1>{{ property.name }}</h1>
-    <h2>{{ property.propertyType }}</h2>
-    <h3>{{ property.price }}</h3>
+  <div class="card-body p-1">
+    <h1 class="mb-0">{{ property.BHK }} BHK {{ property.PropertyType }}</h1>
+
+    in {{ property.Name }}
+    <span *ngIf="property.Name">,</span>
+    {{ property.City }}
+
+    <h6 class="mt-2">
+      {{ property.FurnishingType }}
+      <span *ngIf="property.FurnishingType !== 'Unfurnished'">Furnished</span>
+      <span *ngIf="property.ReadyToMove"> | Ready to Move</span>
+      <span *ngIf="!property.ReadyToMove">
+        | Posession: {{ property.EstPossessionOn | date }}</span
+      >
+    </h6>
+
+    <hr class="mt-0 mb-2" />
+
+    <h6 class="mb-0">
+      Price: <span class="font-highlight">{{ property.Price }} USD.</span> |
+      Area: <span class="font-highlight">{{ property.BuiltArea }} Sq Ft </span>
+    </h6>
   </div>
 </div>

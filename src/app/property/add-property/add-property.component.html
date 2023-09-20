@@ -55,7 +55,7 @@
                       [btnRadio]="bhk.toString()"
                       tabindex="0"
                       role="button"
-                      (click)="propertyView.bhk = bhk"
+                      (click)="propertyView.BHK = bhk"
                       name="BHK"
                     >
                       {{ bhk }}
@@ -75,7 +75,7 @@
                       [btnRadio]="ptype.id.toString()"
                       tabindex="0"
                       role="button"
-                      (click)="propertyView.propertyType = ptype.name"
+                      (click)="propertyView.PropertyType = ptype.name"
                       name="PropType"
                       >{{ ptype.name }}
                     </label>
@@ -91,7 +91,7 @@
                     <label
                       *ngFor="let ftype of furnishTypes"
                       class="btn btn-outline-primary mr-2"
-                      (click)="propertyView.furnishingType = ftype.name"
+                      (click)="propertyView.FurnishingType = ftype.name"
                       [btnRadio]="ftype.id.toString()"
                       tabindex="0"
                       role="button"
@@ -111,7 +111,7 @@
                     type="text"
                     class="form-control"
                     #propName
-                    (keyup)="propertyView.name = propName.value"
+                    (keyup)="propertyView.Name = propName.value"
                     formControlName="Name"
                   />
 
@@ -128,7 +128,7 @@
                   <select
                     #City
                     (change)="
-                      propertyView.city =
+                      propertyView.City =
                         City.options[City.options.selectedIndex].text
                     "
                     class="form-control"
@@ -168,7 +168,7 @@
                     class="form-control"
                     formControlName="Price"
                     #price
-                    (keyup)="propertyView.price = +price.value"
+                    (keyup)="propertyView.Price = +price.value"
                   />
 
                   <div
@@ -209,7 +209,7 @@
                     type="text"
                     class="form-control"
                     #builtArea
-                    (keyup)="propertyView.builtArea = +builtArea.value"
+                    (keyup)="propertyView.BuiltArea = +builtArea.value"
                     formControlName="BuiltArea"
                   />
                   <div
@@ -319,7 +319,7 @@
                       btnRadio="true"
                       tabindex="0"
                       role="button"
-                      (click)="propertyView.readyToMove = true"
+                      (click)="propertyView.ReadyToMove = true"
                       name="RTM"
                       >Yes
                     </label>
@@ -329,7 +329,7 @@
                       btnRadio="false"
                       tabindex="0"
                       role="button"
-                      (click)="propertyView.readyToMove = false"
+                      (click)="propertyView.ReadyToMove = false"
                       name="RTM"
                       >No
                     </label>
@@ -340,10 +340,10 @@
                 </div>
 
                 <div class="form-group col-6">
-                  <label *ngIf="propertyView.readyToMove"
+                  <label *ngIf="propertyView.ReadyToMove"
                     >Establishment Date</label
                   >
-                  <label *ngIf="!propertyView.readyToMove"
+                  <label *ngIf="!propertyView.ReadyToMove"
                     >Possession Date</label
                   >
                   <input
@@ -352,7 +352,7 @@
                     formControlName="PossessionOn"
                     #possessionOn
                     (bsValueChange)="
-                      propertyView.estPossessionOn = possessionOn.value
+                      propertyView.EstPossessionOn = possessionOn.value
                     "
                     bsDatepicker
                     [bsConfig]="{
@@ -500,7 +500,7 @@
     <div class="shadow-lg p-3 bg-white">
       <app-property-card
         [property]="propertyView"
-        hideIcons="true"
+        [hideIcons]="true"
       ></app-property-card>
     </div>
   </div>
