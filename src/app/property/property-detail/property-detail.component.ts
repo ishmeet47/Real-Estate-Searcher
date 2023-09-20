@@ -26,37 +26,24 @@ export class PropertyDetailComponent implements OnInit {
 
   ngOnInit() {
     this.propertyId = +this.route.snapshot.params['id'];
-    // this.route.data.subscribe((data: Property) => {
-    //   this.property = data['prp'];
-    //   // TODO: this.property is current reading undefined
-    //   console.log(this.property);
-    //   console.log(this.property.Photos);
-    // });
-
-    this.route.params.subscribe((params) => {
-      this.propertyId = +params['id'];
-      this.housingService.getProperty(this.propertyId).subscribe(
-        (data: Property) => {
-          this.property = data;
-          this.mainPhotoUrl = this.property.Photo;
-        },
-        (error) => this.router.navigate(['/'])
-      );
+    this.route.data.subscribe((data: Property) => {
+      this.property = data['prp'];
+      this.mainPhotoUrl = this.property.Photo;
     });
+
+    // this.route.params.subscribe((params) => {
+    //   this.propertyId = +params['id'];
+    //   this.housingService.getProperty(this.propertyId).subscribe(
+    //     (data: Property) => {
+    //       this.property = data;
+    //       this.mainPhotoUrl = this.property.Photo;
+    //     },
+    //     (error) => this.router.navigate(['/'])
+    //   );
+    // });
 
     // this.property.Age = this.housingService.getPropertyAge(
     //   this.property.EstPossessionOn
-    // );
-
-    // this.route.params.subscribe(
-    //   (params) => {
-    //     this.propertyId = +params['id'];
-    //     this.housingService.getProperty(this.propertyId).subscribe(
-    //       (data: Property) => {
-    //         this.property = data;
-    //       }, error => this.router.navigate(['/'])
-    //     );
-    //   }
     // );
 
     this.galleryOptions = [

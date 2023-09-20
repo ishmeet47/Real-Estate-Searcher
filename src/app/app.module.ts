@@ -28,6 +28,7 @@ import { AuthService } from './services/auth.service';
 import { DatePipe } from '@angular/common';
 // import { PhotoEditorComponent } from './property/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
 
 const appRoutes: Routes = [
   { path: '', component: PropertyListComponent },
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
   {
     path: 'property-detail/:id',
     component: PropertyDetailComponent,
-    // resolve: {prp: PropertyDetailResolverService}
+    resolve: { prp: PropertyDetailResolverService },
   },
   { path: 'user/login', component: UserLoginComponent },
   { path: 'user/register', component: UserRegisterComponent },
