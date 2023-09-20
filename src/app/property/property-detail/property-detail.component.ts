@@ -26,16 +26,27 @@ export class PropertyDetailComponent implements OnInit {
 
   ngOnInit() {
     this.propertyId = +this.route.snapshot.params['id'];
-    this.route.data.subscribe((data: Property) => {
-      this.property = data['prp'];
-      // TODO: this.property is current reading undefined
-      console.log(this.property);
-      console.log(this.property.Photos);
+    // this.route.data.subscribe((data: Property) => {
+    //   this.property = data['prp'];
+    //   // TODO: this.property is current reading undefined
+    //   console.log(this.property);
+    //   console.log(this.property.Photos);
+    // });
+
+    this.route.params.subscribe((params) => {
+      this.propertyId = +params['id'];
+      this.housingService.getProperty(this.propertyId).subscribe(
+        (data: Property) => {
+          this.property = data;
+          this.mainPhotoUrl = this.property.Photo;
+        },
+        (error) => this.router.navigate(['/'])
+      );
     });
 
-    this.property.Age = this.housingService.getPropertyAge(
-      this.property.EstPossessionOn
-    );
+    // this.property.Age = this.housingService.getPropertyAge(
+    //   this.property.EstPossessionOn
+    // );
 
     // this.route.params.subscribe(
     //   (params) => {
@@ -67,6 +78,9 @@ export class PropertyDetailComponent implements OnInit {
 
   getPropertyPhotos(): NgxGalleryImage[] {
     const photoUrls: NgxGalleryImage[] = [];
+    if (this.property.Photos == null) {
+      return photoUrls;
+    }
     for (const photo of this.property.Photos) {
       if (photo.isPrimary) {
         this.mainPhotoUrl = photo.imageUrl;
