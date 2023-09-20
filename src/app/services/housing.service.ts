@@ -31,19 +31,19 @@ export class HousingService {
   getAllCities(): any[] {
     return [
       {
-        name: 'Mumbai',
+        name: 'Toronto',
         id: 1,
       },
       {
-        name: 'Bangalore',
+        name: 'New York',
         id: 2,
       },
       {
-        name: 'Pune',
+        name: 'Markham',
         id: 3,
       },
       {
-        name: 'Delhi',
+        name: 'Scarborough',
         id: 4,
       },
     ];
