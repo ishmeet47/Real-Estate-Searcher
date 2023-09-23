@@ -11,13 +11,7 @@ namespace API.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "Atlanta", "New York" };  
-        }
-
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "Atlanta";
+            return new string[] { "Atlanta", "New York", "Chicago", "Boston" };
         }
     }
 }
