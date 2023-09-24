@@ -14,9 +14,9 @@ export class HousingService {
 
   constructor(private http: HttpClient) {}
 
-  // getAllCities(): Observable<string[]> {
-  //   return this.http.get<string[]>(this.baseUrl + '/city/cities');
-  // }
+  getAllCities(): Observable<string[]> {
+    return this.http.get<string[]>(this.baseUrl + '/city');
+  }
 
   // getPropertyTypes(): Observable<Ikeyvaluepair[]> {
   //   return this.http.get<Ikeyvaluepair[]>(this.baseUrl + '/propertytype/list');
@@ -27,27 +27,6 @@ export class HousingService {
   //     this.baseUrl + '/furnishingtype/list'
   //   );
   // }
-
-  getAllCities(): any[] {
-    return [
-      {
-        name: 'Toronto',
-        id: 1,
-      },
-      {
-        name: 'New York',
-        id: 2,
-      },
-      {
-        name: 'Markham',
-        id: 3,
-      },
-      {
-        name: 'Scarborough',
-        id: 4,
-      },
-    ];
-  }
 
   getPropertyTypes(): Ikeyvaluepair[] {
     return [
