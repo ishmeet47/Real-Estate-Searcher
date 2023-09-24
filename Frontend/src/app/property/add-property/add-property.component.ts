@@ -59,13 +59,13 @@ export class AddPropertyComponent implements OnInit {
     }
 
     this.CreateAddPropertyForm();
-    // this.housingService.getAllCities().subscribe((data) => {
-    //   this.cityList = data;
-    //   console.log(data);
-    // });
-    const data1 = this.housingService.getAllCities();
-    this.cityList = data1;
-    console.log(data1);
+    this.housingService.getAllCities().subscribe((data) => {
+      this.cityList = data;
+      console.log(data);
+    });
+    // const data1 = this.housingService.getAllCities();
+    // this.cityList = data1;
+    // console.log(data1);
 
     // this.housingService.getPropertyTypes().subscribe((data) => {
     //   this.propertyTypes = data;
