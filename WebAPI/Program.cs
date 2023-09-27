@@ -27,7 +27,6 @@ builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
