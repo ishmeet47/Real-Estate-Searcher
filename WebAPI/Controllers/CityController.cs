@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
         {
             var cities = await _uow.CityRepository.GetCitiesAsync();
             var citiesDto = _mapper.Map<IEnumerable<CityDto>>(cities);
-            return Ok(citiesDto); 
+            return Ok(citiesDto);
         }
 
         // POST :  api/city/add?cityname=cityname
