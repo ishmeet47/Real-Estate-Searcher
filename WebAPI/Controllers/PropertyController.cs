@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Dtos;
 using WebAPI.Interfaces;
@@ -15,13 +11,10 @@ namespace WebAPI.Controllers
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
-        private readonly IPhotoService _photoService;
 
         public PropertyController(IUnitOfWork uow,
-        IMapper mapper,
-        IPhotoService photoService)
+        IMapper mapper)
         {
-            this._photoService = photoService;
             this._uow = uow;
             this._mapper = mapper;
         }
@@ -60,37 +53,6 @@ namespace WebAPI.Controllers
             return StatusCode(201);
         }
 
-        //property/add/photo/1
-        [HttpPost("add/photo/{propId}")]
-        [Authorize]
-        public async Task<ActionResult<PhotoDto>> AddPropertyPhoto(IFormFile file, int propId)
-        {
-            var result = await _photoService.UploadPhotoAsync(file);
-            if (result.Error != null)
-                return BadRequest(result.Error.Message);
-            var userId = GetUserId();
-
-            var property = await _uow.PropertyRepository.GetPropertyByIdAsync(propId);
-
-            if (property.PostedBy != userId)
-                return BadRequest("You are not authorised to upload photo for this property");
-
-            var photo = new Photo
-            {
-                ImageUrl = result.SecureUrl.AbsoluteUri,
-                PublicId = result.PublicId
-            };
-            if (property.Photos.Count == 0)
-            {
-                photo.IsPrimary = true;
-            }
-
-            property.Photos.Add(photo);
-            if (await _uow.SaveAsync()) return _mapper.Map<PhotoDto>(photo);
-
-            return BadRequest("Some problem occured in uploading photo..");
-        }
-
         //property/set-primary-photo/42/jl0sdfl20sdf2s
         [HttpPost("set-primary-photo/{propId}/{photoPublicId}")]
         [Authorize]
@@ -123,44 +85,6 @@ namespace WebAPI.Controllers
 
             return BadRequest("Failed to set primary photo");
         }
-
-        [HttpDelete("delete-photo/{propId}/{photoPublicId}")]
-        [Authorize]
-        public async Task<IActionResult> DeletePhoto(int propId, string photoPublicId)
-        {
-            var userId = GetUserId();
-
-            var property = await _uow.PropertyRepository.GetPropertyByIdAsync(propId);
-
-            if (property.PostedBy != userId)
-                return BadRequest("You are not authorised to delete the photo");
-
-            if (property == null || property.PostedBy != userId)
-                return BadRequest("No such property or photo exists");
-
-            var photo = property.Photos.FirstOrDefault(p => p.PublicId == photoPublicId);
-
-            if (photo == null)
-                return BadRequest("No such property or photo exists");
-
-            if (photo.IsPrimary)
-                return BadRequest("You can not delete primary photo");
-
-            if (photo.PublicId != null)
-            {
-                var result = await _photoService.DeletePhotoAsync(photo.PublicId);
-                if (result.Error != null) return BadRequest(result.Error.Message);
-            }
-
-            property.Photos.Remove(photo);
-
-            if (await _uow.SaveAsync()) return Ok();
-
-            return BadRequest("Failed to delete photo");
-        }
-
-
-
 
     }
 }
