@@ -5,24 +5,24 @@ namespace WebAPI.Middlewares
 {
     public class ExceptionMiddleware
     {
-        private readonly RequestDelegate next;
-        private readonly ILogger<ExceptionMiddleware> logger;
-        private readonly IHostEnvironment env;
+        private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionMiddleware> _logger;
+        private readonly IHostEnvironment _env;
 
         public ExceptionMiddleware(RequestDelegate next,
                                     ILogger<ExceptionMiddleware> logger,
                                     IHostEnvironment env)
         {
-            this.env = env;
-            this.next = next;
-            this.logger = logger;
+            this._env = env;
+            this._next = next;
+            this._logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
         {
             try
             {
-                await next(context);
+                await _next(context);
             }
             catch (Exception ex)
             {
@@ -42,7 +42,7 @@ namespace WebAPI.Middlewares
                     message = "Some unknown error occoured";
                 }
 
-                if (env.IsDevelopment())
+                if (_env.IsDevelopment())
                 {
                     response = new ApiError((int)statusCode, ex.Message, ex.StackTrace.ToString());
                 }
@@ -51,7 +51,7 @@ namespace WebAPI.Middlewares
                     response = new ApiError((int)statusCode, message);
                 }
 
-                logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.Message);
                 context.Response.StatusCode = (int)statusCode;
                 context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(response.ToString());
