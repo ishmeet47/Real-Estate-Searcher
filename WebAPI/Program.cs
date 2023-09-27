@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using WebAPI.Data;
 using WebAPI.Data.Repo;
 using WebAPI.Extensions;
@@ -23,6 +27,24 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(build
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+var secretKey = builder.Configuration.GetSection("AppSettings:Key").Value;
+var key = new SymmetricSecurityKey(Encoding.UTF8
+    .GetBytes(secretKey));
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    // services.AddAuthentication("Bearer")
+    .AddJwtBearer(opt =>
+    {
+        opt.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            IssuerSigningKey = key
+        };
+    });
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,13 +54,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Add Cors
+app.UseCors(m => m.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 app.ConfigureExceptionHandler(app.Environment);
 
 app.UseAuthorization();
 
 app.MapControllers();
-
-// Add Cors
-app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.Run();
