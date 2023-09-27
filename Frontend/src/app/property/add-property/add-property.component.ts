@@ -54,7 +54,7 @@ export class AddPropertyComponent implements OnInit {
 
   ngOnInit() {
     if (!localStorage.getItem('userName')) {
-      this.alertify.error('You must be logged in to add a property');
+      this.alertify.error('You must be looged in to add a property');
       this.router.navigate(['/user/login']);
     }
 
@@ -63,21 +63,14 @@ export class AddPropertyComponent implements OnInit {
       this.cityList = data;
       console.log(data);
     });
-    // const data1 = this.housingService.getAllCities();
-    // this.cityList = data1;
-    // console.log(data1);
 
-    // this.housingService.getPropertyTypes().subscribe((data) => {
-    //   this.propertyTypes = data;
-    // });
-    const data2 = this.housingService.getPropertyTypes();
-    this.propertyTypes = data2;
+    this.housingService.getPropertyTypes().subscribe((data) => {
+      this.propertyTypes = data;
+    });
 
-    // this.housingService.getFurnishingTypes().subscribe((data) => {
-    //   this.furnishTypes = data;
-    // });
-    const data3 = this.housingService.getFurnishingTypes();
-    this.furnishTypes = data3;
+    this.housingService.getFurnishingTypes().subscribe((data) => {
+      this.furnishTypes = data;
+    });
   }
 
   CreateAddPropertyForm() {
@@ -232,29 +225,18 @@ export class AddPropertyComponent implements OnInit {
     this.nextClicked = true;
     if (this.allTabsValid()) {
       this.mapProperty();
-      // this.housingService.addProperty(this.property).subscribe(() => {
-      //   this.alertify.success(
-      //     'Congrats, your property listed successfully on our website'
-      //   );
-      //   console.log(this.addPropertyForm);
+      this.housingService.addProperty(this.property).subscribe(() => {
+        this.alertify.success(
+          'Congrats, your property listed successfully on our website'
+        );
+        console.log(this.addPropertyForm);
 
-      //   if (this.SellRent.value === '2') {
-      //     this.router.navigate(['/rent-property']);
-      //   } else {
-      //     this.router.navigate(['/']);
-      //   }
-      // });
-      this.housingService.addProperty(this.property);
-      this.alertify.success(
-        'Congrats, your property listed successfully on our website'
-      );
-      console.log(this.addPropertyForm);
-
-      if (this.SellRent.value === '2') {
-        this.router.navigate(['/rent-property']);
-      } else {
-        this.router.navigate(['/']);
-      }
+        if (this.SellRent.value === '2') {
+          this.router.navigate(['/rent-property']);
+        } else {
+          this.router.navigate(['/']);
+        }
+      });
     } else {
       this.alertify.error(
         'Please review the form and provide all valid entries'

@@ -28,22 +28,22 @@ export class PropertyDetailComponent implements OnInit {
     this.propertyId = +this.route.snapshot.params['id'];
     this.route.data.subscribe((data: Property) => {
       this.property = data['prp'];
-      this.mainPhotoUrl = this.property.Photo;
+      console.log(this.property.Photos);
     });
 
-    // this.route.params.subscribe((params) => {
-    //   this.propertyId = +params['id'];
-    //   this.housingService.getProperty(this.propertyId).subscribe(
-    //     (data: Property) => {
-    //       this.property = data;
-    //       this.mainPhotoUrl = this.property.Photo;
-    //     },
-    //     (error) => this.router.navigate(['/'])
-    //   );
-    // });
+    this.property.Age = this.housingService.getPropertyAge(
+      this.property.EstPossessionOn
+    );
 
-    // this.property.Age = this.housingService.getPropertyAge(
-    //   this.property.EstPossessionOn
+    // this.route.params.subscribe(
+    //   (params) => {
+    //     this.propertyId = +params['id'];
+    //     this.housingService.getProperty(this.propertyId).subscribe(
+    //       (data: Property) => {
+    //         this.property = data;
+    //       }, error => this.router.navigate(['/'])
+    //     );
+    //   }
     // );
 
     this.galleryOptions = [
@@ -54,49 +54,9 @@ export class PropertyDetailComponent implements OnInit {
         imageAnimation: NgxGalleryAnimation.Slide,
         preview: true,
       },
-      {
-        breakpoint: 800,
-        width: '100%',
-        height: '400px',
-        imagePercent: 80,
-        thumbnailsPercent: 20,
-        thumbnailsMargin: 20,
-        thumbnailMargin: 20,
-      },
-      {
-        breakpoint: 400,
-        preview: false,
-      },
     ];
 
-    // this.galleryImages = this.getPropertyPhotos();
-    this.galleryImages = [
-      {
-        small: 'assets/images/internal-1.jpg',
-        medium: 'assets/images/internal-1.jpg',
-        big: 'assets/images/internal-1.jpg',
-      },
-      {
-        small: 'assets/images/internal-2.jpg',
-        medium: 'assets/images/internal-2.jpg',
-        big: 'assets/images/internal-2.jpg',
-      },
-      {
-        small: 'assets/images/internal-3.jpg',
-        medium: 'assets/images/internal-3.jpg',
-        big: 'assets/images/internal-3.jpg',
-      },
-      {
-        small: 'assets/images/internal-4.jpg',
-        medium: 'assets/images/internal-4.jpg',
-        big: 'assets/images/internal-4.jpg',
-      },
-      {
-        small: 'assets/images/internal-5.jpg',
-        medium: 'assets/images/internal-5.jpg',
-        big: 'assets/images/internal-5.jpg',
-      },
-    ];
+    this.galleryImages = this.getPropertyPhotos();
   }
 
   changePrimaryPhoto(mainPhotoUrl: string) {
@@ -105,9 +65,6 @@ export class PropertyDetailComponent implements OnInit {
 
   getPropertyPhotos(): NgxGalleryImage[] {
     const photoUrls: NgxGalleryImage[] = [];
-    if (this.property.Photos == null) {
-      return photoUrls;
-    }
     for (const photo of this.property.Photos) {
       if (photo.isPrimary) {
         this.mainPhotoUrl = photo.imageUrl;
