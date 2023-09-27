@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Net;
 using WebAPI.Data;
 using WebAPI.Data.Repo;
+using WebAPI.Extensions;
 using WebAPI.Helpers;
 using WebAPI.Interfaces;
 
@@ -31,37 +32,15 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseDeveloperExceptionPage();
-} else {
-    app.UseExceptionHandler(
-        options =>
-        {
-            options.Run(
-                async context =>
-                {
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    var ex = context.Features.Get<IExceptionHandlerFeature>();
-                    if (ex != null)
-                    {
-                        await context.Response.WriteAsync(ex.Error.Message);
-                    }
-                }
-            );
-        }
-    );
 }
+
+app.ConfigureExceptionHandler(app.Environment);
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-// Add Cors #2
-app.UseCors(builder =>
-{
-    builder.AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    ;
-});
+// Add Cors
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.Run();
