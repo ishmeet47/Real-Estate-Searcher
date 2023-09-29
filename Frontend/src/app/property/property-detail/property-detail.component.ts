@@ -28,11 +28,11 @@ export class PropertyDetailComponent implements OnInit {
     this.propertyId = +this.route.snapshot.params['id'];
     this.route.data.subscribe((data: Property) => {
       this.property = data['prp'];
-      console.log(this.property.Photos);
+      console.log(this.property.photos);
     });
 
-    this.property.Age = this.housingService.getPropertyAge(
-      this.property.EstPossessionOn
+    this.property.age = this.housingService.getPropertyAge(
+      this.property.estPossessionOn
     );
 
     // this.route.params.subscribe(
@@ -65,7 +65,7 @@ export class PropertyDetailComponent implements OnInit {
 
   getPropertyPhotos(): NgxGalleryImage[] {
     const photoUrls: NgxGalleryImage[] = [];
-    for (const photo of this.property.Photos) {
+    for (const photo of this.property.photos) {
       if (photo.isPrimary) {
         this.mainPhotoUrl = photo.imageUrl;
       } else {
