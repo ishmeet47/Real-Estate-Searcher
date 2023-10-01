@@ -442,6 +442,14 @@
                     formControlName="Description"
                     rows="6"
                   ></textarea>
+                  <div
+                    class="error-block"
+                    *ngIf="
+                      !Description.value && (nextClicked || Description.touched)
+                    "
+                  >
+                    Please enter description
+                  </div>
                 </div>
 
                 <div class="form-group col-12">
